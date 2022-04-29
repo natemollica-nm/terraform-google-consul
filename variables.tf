@@ -6,41 +6,49 @@
 variable "gcp_project_id" {
   description = "The name of the GCP Project where all resources will be launched."
   type        = string
+  default     = null
 }
 
 variable "gcp_region" {
   description = "The region in which all GCP resources will be launched."
   type        = string
+  default     = null
 }
 
 variable "consul_server_cluster_name" {
   description = "The name of the Consul Server cluster. All resources will be namespaced by this value. E.g. consul-server-prod"
   type        = string
+  default     = "gcp-consul-cluster-servers"
 }
 
 variable "consul_client_cluster_name" {
   description = "The name of the Consul Client example cluster. All resources will be namespaced by this value. E.g. consul-client-example"
   type        = string
+  default     = "gcp-consul-cluster-clients"
 }
 
 variable "consul_server_cluster_tag_name" {
   description = "The tag the consul server Compute Instances will look for to automatically discover each other and form a cluster. TIP: If running more than one Consul Server cluster, each cluster should have its own unique tag name. If you're not sure what to put for this value, just use the value entered in var.cluster_name."
   type        = string
+  default     = "gcp-consul-cluster-servers-dc1"
 }
 
 variable "consul_client_cluster_tag_name" {
   description = "A tag that will uniquely identify the Consul Clients. In this example, the Consul Server cluster uses this tag to identify the Consul Client servers that should have query permissions."
   type        = string
+  default     = "gcp-consul-cluster-clients-dc1"
 }
 
 variable "consul_server_source_image" {
   description = "The Google Image used to launch each node in the Consul Server cluster."
   type        = string
+  default     = "ubuntu-18-consul-srvr-nm"
 }
 
 variable "consul_client_source_image" {
   description = "The Google Image used to launch each node in the Consul Client cluster."
   type        = string
+  default     = "ubuntu-18-consul-clnt-nm"
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -63,7 +71,7 @@ variable "network_project_id" {
 variable "consul_server_cluster_size" {
   description = "The number of nodes to have in the Consul Server cluster. We strongly recommended that you use either 3 or 5."
   type        = number
-  default     = 3
+  default     = 5
 }
 
 variable "consul_client_cluster_size" {

@@ -29,11 +29,11 @@ module "consul_servers" {
   gcp_project_id      = var.gcp_project_id
   gcp_region          = var.gcp_region
   cluster_name        = var.consul_server_cluster_name
-  cluster_description = "Consul Server cluster"
+  cluster_description = "Consul Server Cluster"
   cluster_size        = var.consul_server_cluster_size
   cluster_tag_name    = var.consul_server_cluster_tag_name
   startup_script      = data.template_file.startup_script_server.rendered
-  shutdown_script     = file("${path.module}/examples/root-example/shutdown-script.sh")
+  shutdown_script     = file("${path.module}/root/shutdown-script.sh")
 
   # Grant API and DNS access to requests originating from the the Consul client cluster we create below.
   allowed_inbound_tags_http_api        = [var.consul_server_cluster_tag_name]
@@ -79,7 +79,7 @@ module "consul_servers" {
 # This script will configure and start Consul.
 data "template_file" "startup_script_server" {
   template = file(
-    "${path.module}/examples/root-example/startup-script-server.sh",
+    "${path.module}/root/startup-script-server.sh",
   )
 
   vars = {
@@ -98,16 +98,16 @@ module "consul_clients" {
   # When using these modules in your own templates, you will need to use a Git URL with a ref attribute that pins you
   # to a specific version of the modules, such as the following example:
   # source = "git::git@github.com:gruntwork-io/consul-gcp-module.git//modules/consul-cluster?ref=v0.0.1"
-  source = "./modules/consul-cluster"
+  source = "modules/consul-cluster"
 
   gcp_project_id      = var.gcp_project_id
   gcp_region          = var.gcp_region
   cluster_name        = var.consul_client_cluster_name
-  cluster_description = "Consul Clients cluster"
+  cluster_description = "Consul Clients Cluster"
   cluster_size        = var.consul_client_cluster_size
   cluster_tag_name    = var.consul_client_cluster_tag_name
   startup_script      = data.template_file.startup_script_client.rendered
-  shutdown_script     = file("${path.module}/examples/root-example/shutdown-script.sh")
+  shutdown_script     = file("${path.module}/root/shutdown-script.sh")
 
   allowed_inbound_tags_http_api        = [var.consul_client_cluster_tag_name]
   allowed_inbound_cidr_blocks_http_api = var.consul_client_allowed_inbound_cidr_blocks_http_api
@@ -137,7 +137,7 @@ module "consul_clients" {
 # This script will configure and start Consul.
 data "template_file" "startup_script_client" {
   template = file(
-    "${path.module}/examples/root-example/startup-script-client.sh",
+    "${path.module}/root/startup-script-client.sh",
   )
 
   vars = {

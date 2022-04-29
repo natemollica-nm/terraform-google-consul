@@ -6,31 +6,37 @@
 variable "gcp_project_id" {
   description = "The project to deploy the cluster in"
   type        = string
+  default     = null
 }
 
 variable "gcp_region" {
   description = "All GCP resources will be launched in this Region."
   type        = string
+  default     = null
 }
 
 variable "cluster_name" {
   description = "The name of the Consul cluster (e.g. consul-stage). This variable is used to namespace all resources created by this module."
   type        = string
+  default     = "gcp-consul-cluster"
 }
 
 variable "cluster_tag_name" {
   description = "The tag name the Compute Instances will look for to automatically discover each other and form a cluster. TIP: If running more than one Consul Server cluster, each cluster should have its own unique tag name."
   type        = string
+  default     = "gcp-consul-cluster-dc1"
 }
 
 variable "machine_type" {
   description = "The machine type of the Compute Instance to run for each node in the cluster (e.g. n1-standard-1)."
   type        = string
+  default   = "g1-small"
 }
 
 variable "cluster_size" {
   description = "The number of nodes to have in the Consul cluster. We strongly recommended that you use either 3 or 5."
   type        = number
+  default     = 5
 }
 
 variable "source_image" {
@@ -44,7 +50,7 @@ variable "startup_script" {
 }
 
 variable "shutdown_script" {
-  description = "A Shutdown Script to execute when the server recieves a restart or stop event. We recommend passing in a bash script that executes the `consul leave` command."
+  description = "A Shutdown Script to execute when the server receives a restart or stop event. We recommend passing in a bash script that executes the `consul leave` command."
   type        = string
 }
 

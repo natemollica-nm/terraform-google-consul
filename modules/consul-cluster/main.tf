@@ -63,7 +63,7 @@ resource "google_compute_instance_template" "consul_server" {
   metadata_startup_script = var.startup_script
   metadata = merge(
     {
-      "${var.metadata_key_name_for_cluster_size}" = var.cluster_size,
+      (var.metadata_key_name_for_cluster_size) = var.cluster_size,
 
       # The Terraform Google provider currently doesn't support a `metadata_shutdown_script` argument so we manually
       # set it here using the instance metadata.
@@ -157,7 +157,7 @@ resource "google_compute_firewall" "allow_intracluster_consul" {
 }
 
 # Specify which traffic is allowed into the Consul Cluster solely for HTTP API requests
-# - This Firewall Rule may be redundant depnding on the settings of your VPC Network, but if your Network is locked down,
+# - This Firewall Rule may be redundant depending on the settings of your VPC Network, but if your Network is locked down,
 #   this Rule will open up the appropriate ports.
 # - Note that public access to your Consul Cluster will only be permitted if var.assign_public_ip_addresses is true.
 # - This Firewall Rule is only created if at least one source tag or source CIDR block is specified.
