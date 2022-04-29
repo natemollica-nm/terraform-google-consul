@@ -1,9 +1,3 @@
-# DISCLAIMER: This is no longer supported.
-Moving forward in the future this repository will be no longer supported and eventually lead to
-deprecation. Please use our latest versions of our products moving forward or alternatively you
-may fork the repository to continue use and development for your personal/business use.
-
----
 ![Terraform Version](https://img.shields.io/badge/tf-%3E%3D0.12.0-blue.svg)
 
 # Consul for Google Cloud Platform (GCP)
